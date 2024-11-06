@@ -1,23 +1,22 @@
 import { useState } from "react";
-import Button from "./components/Button";
-import Alert from "./components/Alert";
-import ListGroup from "./components/ListGroup";
-
+import produce from "immer";
 function App() {
-  const items = ["Nairobi", "New York", "Paris", "London", "Tokyo"]
-  const [isClicked, setIsClicked] = useState(false)
-  const handleClick = () => setIsClicked(true);
+  const [bugs, setBugs] = useState([
+    {id: 1, title: 'Bug 1', fixed: false},
+    {id: 2, title: 'Bug 2', fixed: false},
+  ])
+  const handleClick = () =>{
+    // setBugs(bugs.map(bug => bug.id === 1 ? {...bug, fixed:true}: bug))
+    setBugs(produce(draft => {
+      const bug = draft.find(bug => bug.id === 1)
+      if(bug){
+        bug.fixed = true
+      }
+    }))
+  }
   return (
     <div>
-      <ListGroup heading="Cities" items={items} onSelectItem={()=> console.log("clicked")} />
-      {
-        isClicked && (
-          <Alert onClose={()=> setIsClicked(false)}>
-            <p>This is a custom alert component.</p>
-          </Alert>
-        )
-      }
-      <Button color="secondary" onClick={handleClick}>My Button</Button>
+      <button onClick={handleClick}>Click Me</button>
     </div>
   );
 }
