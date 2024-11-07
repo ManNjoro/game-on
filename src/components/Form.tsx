@@ -13,13 +13,12 @@ const Form = () => {
   //   };
   const [person, setPerson] = useState({
     name: "",
-    age: 0,
+    age: "",
   });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(person);
-    
   };
 
   return (
@@ -31,6 +30,7 @@ const Form = () => {
         <input
           //   ref={nameRef}
           onChange={(e) => setPerson({ ...person, name: e.target.value })}
+          value={person.name}
           type="text"
           name=""
           id="name"
@@ -42,8 +42,11 @@ const Form = () => {
           Age
         </label>
         <input
-        //   ref={ageRef}
-        onChange={e=> setPerson({...person, age: parseInt(e.target.value)})}
+          //   ref={ageRef}
+          onChange={(e) =>
+            setPerson({ ...person, age: e.target.value })
+          }
+          value={person.age}
           type="number"
           name=""
           id="age"
