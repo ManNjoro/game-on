@@ -1,7 +1,7 @@
 import { useState } from "react";
 import produce from "immer";
 import { AiFillPlusSquare } from "react-icons/ai";
-function App() {
+function AppPraco() {
   const [bugs, setBugs] = useState([
     {id: 1, title: 'Bug 1', fixed: false},
     {id: 2, title: 'Bug 2', fixed: false},
@@ -58,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppPraco;
