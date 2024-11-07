@@ -84,6 +84,19 @@ const handleDelete = (category: string) => {
           Submit
         </button>
       </form>
+      <div className="mb-3">
+          <select
+            {...register("category")}
+            className="form-select"
+            id="floatingSelect"
+            aria-label="Floating label select example"
+          >
+            <option selected value="all">All categories</option>
+            <option value="groceries">Groceries</option>
+            <option value="utilities">Utility</option>
+            <option value="entertainment">Entertainment</option>
+          </select>
+        </div>
       <table className="table">
         <thead>
           <tr>
