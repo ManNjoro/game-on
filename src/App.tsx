@@ -1,33 +1,34 @@
 import { useState } from "react";
 import produce from "immer";
 import { AiFillPlusSquare } from "react-icons/ai";
+import ExapandableText from "./components/ExapandableText";
 function App() {
   const [bugs, setBugs] = useState([
-    {id: 1, title: 'Bug 1', fixed: false},
-    {id: 2, title: 'Bug 2', fixed: false},
-  ])
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
 
   const [game, setGame] = useState({
-    id:1,
+    id: 1,
     player: {
-      name: "John"
-    }
-  })
+      name: "John",
+    },
+  });
 
   const [pizza, setPizza] = useState({
-    name: 'Spicy Pepperoni',
-    toppings: ['Mushroom']
-  })
+    name: "Spicy Pepperoni",
+    toppings: ["Mushroom"],
+  });
 
   const [cart, setCart] = useState({
-    discount: .1,
+    discount: 0.1,
     items: [
-      {id: 1, title: 'Product 1', quantity: 1},
-      {id: 2, title: 'Product 2', quantity: 1}
-    ]
-  })
+      { id: 1, title: "Product 1", quantity: 1 },
+      { id: 2, title: "Product 2", quantity: 1 },
+    ],
+  });
 
-  const handleClick = (id: number) =>{
+  const handleClick = (id: number) => {
     // setBugs(bugs.map(bug => bug.id === 1 ? {...bug, fixed:true}: bug))
     // setBugs(produce(draft => {
     //   const bug = draft.find(bug => bug.id === 1)
@@ -35,25 +36,20 @@ function App() {
     //     bug.fixed = true
     //   }
     // }))
-    setGame({...game, player: {...game.player, name:"Eli"}})
-    setPizza({...pizza, toppings: [...pizza.toppings, 'Extra Cheese']})
-    setCart({...cart, items: cart.items.map(item => item.id === id ? {...item, quantity: item.quantity + 1} : item)})
-  }
+    setGame({ ...game, player: { ...game.player, name: "Eli" } });
+    setPizza({ ...pizza, toppings: [...pizza.toppings, "Extra Cheese"] });
+    setCart({
+      ...cart,
+      items: cart.items.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
+  };
   return (
     <div>
-      <p>{game.player.name}</p>
-      <ul>
-        {pizza.toppings.map((top, index) =><li key={index}>{top}</li> )}
-      </ul>
-      {/* <button onClick={handleClick}>Click Me</button> */}
-      <ul>
-        {cart.items.map((item) => (
-          <>
-          <li key={item.id}>{item.title} - {item.quantity}</li>
-          <AiFillPlusSquare size={30} cursor={"pointer"} onClick={()=>handleClick(item.id)} />
-          </>
-        ))}
-      </ul>
+      <ExapandableText maxChars={40}>
+        Hello
+      </ExapandableText>
     </div>
   );
 }
