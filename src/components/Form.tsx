@@ -1,38 +1,21 @@
 import { FormEvent, useRef, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 
 const Form = () => {
-  //   const nameRef = useRef<HTMLInputElement>(null);
-  //   const ageRef = useRef<HTMLInputElement>(null)
-  //   const person = {name: '', age: 0}
-  //   const handleSubmit = (e: FormEvent) => {
-  //     e.preventDefault();
-  //     if (nameRef.current !== null) person.name = nameRef.current.value;
-  //     if (ageRef.current !== null) person.age = parseInt(ageRef.current.value);
-  //     console.log(person);
-
-  //   };
-  const [person, setPerson] = useState({
-    name: "",
-    age: "",
-  });
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log(person);
-  };
+  const { register, handleSubmit, formState } = useForm();
+  console.log(formState.errors);
+  
+  const onSubmit = (data: FieldValues) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
         </label>
         <input
-          //   ref={nameRef}
-          onChange={(e) => setPerson({ ...person, name: e.target.value })}
-          value={person.name}
+          {...register("name", { required: true, minLength: 3 })}
           type="text"
-          name=""
           id="name"
           className="form-control"
         />
@@ -42,13 +25,8 @@ const Form = () => {
           Age
         </label>
         <input
-          //   ref={ageRef}
-          onChange={(e) =>
-            setPerson({ ...person, age: e.target.value })
-          }
-          value={person.age}
+          {...register("age")}
           type="number"
-          name=""
           id="age"
           className="form-control"
         />
