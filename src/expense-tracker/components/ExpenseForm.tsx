@@ -23,19 +23,21 @@ const ExpenseForm = () => {
         <label htmlFor="description" className="form-label">
           Description
         </label>
-        <input type="text" id="description" className="form-control" />
+        <input {...register('description')} type="text" id="description" className="form-control" />
+        {errors.description && <p className="text-danger">{errors.description.message}</p>}
       </div>
       <div className="mb3">
         <label htmlFor="amount" className="form-label">
           Amount
         </label>
-        <input type="number" id="amount" className="form-control" />
+        <input {...register('amount')} type="number" id="amount" className="form-control" />
+        {errors.amount && <p className="text-danger">{errors.amount.message}</p>}
       </div>
       <div className="mb-3">
         <label htmlFor="category" className="form-label">
           Category
         </label>
-        <select id="category" className="form-select">
+        <select {...register('category')} id="category" className="form-select">
           <option value=""></option>
           {categories.map((category) => (
             <option key={category} value={category}>
@@ -43,6 +45,7 @@ const ExpenseForm = () => {
             </option>
           ))}
         </select>
+        {errors.category && <p className="text-danger">{errors.category.message}</p>}
       </div>
       <button className="btn btn-primary">Submit</button>
     </form>
